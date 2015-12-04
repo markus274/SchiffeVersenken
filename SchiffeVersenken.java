@@ -193,10 +193,12 @@ public class SchiffeVersenken {
     @param grid char-Array player oder opponent
     */
     public static void print(char[][] grid) {
+    
+        char[] row_alpha = {'A','B','C','D','E','F','G','H','I','J'};
         
         System.out.println("\n " + "0123456789");
         for (int i = 0; i < grid.length; i++) {
-            System.out.print(i);
+            System.out.print(row_alpha[i]);
             for (int n = 0; n < grid.length; n++) {
                 System.out.print(grid[i][n]);
             }
