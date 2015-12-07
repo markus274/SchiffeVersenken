@@ -77,7 +77,7 @@ public class SchiffeVersenken {
             System.out.print("Zeile: ");
             
             do {
-                row = checkInt();
+                row = convertChar();
                 if (!(row >= 0 && row <= 9)) {
                     System.out.print("Ungueltige Eingabe! \nNochmal: ");
                 }
@@ -147,7 +147,7 @@ public class SchiffeVersenken {
             System.out.print("Zeile: ");
             
             do {
-                row = checkInt();
+                row = convertChar();
                 if (!(row >= 0 && row <= 9)) {
                     System.out.print("Ungueltige Eingabe! \nNochmal: ");
                 }
@@ -225,6 +225,49 @@ public class SchiffeVersenken {
         //Rueckgabe des Eingabewertes als Integer
         return input;
     }    
+
+    /**
+    Die Methode ueberprueft, ob die Einegabe ein char zwischen A und J ist und verlangt
+    sonst die Einabe eines chars, der Zwischen A und J liegt. Zudem konvertiert die Methode
+    die Buchstaben in Integer in der Form a=0, A=0 -> j=9, J=9.
+    @return gibt die char Eingabe als konvertierten Integer zurück.
+    */
+    public static int convertChar() {
+
+        Scanner scan = new Scanner(System.in);
+        String inputAsString;
+        char inputAsChar;
+        int inputAsInt, convertedInt = 400, counter = 0;
+
+        do {
+            inputAsString = scan.next();
+            if (inputAsString.length() == 1) {                  //ueberprueft, ob ein einzelnes Zeichen eingegeben wurde
+                inputAsChar = inputAsString.charAt(0);          //Konvertierung String->Char
+                inputAsInt = (int) inputAsChar;                 //Konvertierung Char->Int
+
+                if (inputAsInt >= 65 && inputAsInt <= 74) {         //Grossbuchstaben A bis J
+                    convertedInt = inputAsInt - 65;
+                    counter = 1;
+                }
+                else if (inputAsInt >=97 && inputAsInt <=106) {      //Kleinbuchstaben a bis j
+                    convertedInt = inputAsInt -97;
+                    counter = 1;
+                }
+                else {
+                    counter = 0;
+                    scan.nextLine();
+                    System.out.print("Ungueltige Eingabe! Bitte eine Zeile zwischen A und J waehlen. \nZeile: ");
+                }
+            }
+            else {
+                counter = 0;
+                scan.nextLine();
+                System.out.println("Unguelitge Eingabe! Bitte eine Zeile zwischen A und J waehlen. \nZeile: ");
+            }
+        } while (counter == 0);
+
+        return convertedInt;
+    }
 
     /**
     Gibt zu Beginn des Spieles beide Spielfelder aus ,stellt eine 
